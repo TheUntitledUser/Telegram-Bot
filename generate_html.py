@@ -3,7 +3,7 @@ import sqlite3
 def fetch_records():
     conn = sqlite3.connect('cartridges.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT username, office, model, replacement_date FROM cartridge_records')
+    cursor.execute('SELECT username, cabinet, model, replacement_date, date_of_transfer, return_date, counter_before_replacement, counter_after_replacement, number_of_pages FROM cartridge_records')
     records = cursor.fetchall()
     conn.close()
     return records
@@ -11,7 +11,7 @@ def fetch_records():
 def generate_table(records):
     rows_html = ""
     for row in records:
-        rows_html += f"<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td></tr>"
+        rows_html += f"<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td><td>{row[4]}</td><td>{row[5]}</td><td>{row[6]}</td><td>{row[7]}</td><td>{row[8]}</td></tr>"
     return rows_html
 
 def update_html_file():
@@ -27,7 +27,7 @@ def update_html_file():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Записи о картриджах</title>
+        <title>Учет картриджей</title>
         <style>
             table {{
                 width: 100%;
@@ -51,6 +51,11 @@ def update_html_file():
                 <th>Кабинет</th>
                 <th>Модель</th>
                 <th>Дата замены</th>
+                <th>Дата передачи</th>
+                <th>Дата возврата</th>
+                <th>Счетчик отпечатанных страниц до замены</th>
+                <th>Счетчик отпечатанных страниц после замены</th>
+                <th>Общее количество отпечатанных страниц</th>
             </tr>
             {rows_html}
         </table>
