@@ -24,7 +24,7 @@ cursor.execute('''
 conn.close()
 
 # Ваш токен
-API_TOKEN = '7812404465:AAH16zFpZwagNTTQGu7RstW7YsKpVghVNxQ'
+API_TOKEN = 'TOKEN'
 
 bot = telebot.TeleBot(API_TOKEN)
 
